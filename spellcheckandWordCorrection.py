@@ -3,9 +3,11 @@ from collections import Counter
 from pandas import read_csv
 from nltk.corpus import stopwords
 
+####### Spell Correction #######
+
 def words(text): return re.findall(r'\w+', text.lower())
 
-WORDS = Counter(words(open('big.txt').read()))
+WORDS = Counter(words(open('data/big.txt').read()))
 
 def P(word, N=sum(WORDS.values())): 
     "Probability of `word`."
@@ -36,6 +38,9 @@ def edits1(word):
 def edits2(word): 
     "All edits that are two edits away from `word`."
     return (e2 for e1 in edits1(word) for e2 in edits1(e1))
+
+
+####### Words Correctionns #######
 
 
 test = "this Is @ for Ave. @ nasaasd"
@@ -69,10 +74,10 @@ def data_read():
     '''
     Read acronym and abbreviation data
     '''
-    acronym_data = read_csv(filepath_or_buffer ="acronym.csv",header=None,skiprows=0)# since no header info
+    acronym_data = read_csv(filepath_or_buffer ="data/acronym.csv",header=None,skiprows=0)# since no header info
     acrr = [acronym_data[0].tolist(),acronym_data[1].tolist(),acronym_data[2].tolist()]
     
-    abbr_data = read_csv(filepath_or_buffer="Abbreviations.csv",header=None,skiprows=0)
+    abbr_data = read_csv(filepath_or_buffer="data/Abbreviations.csv",header=None,skiprows=0)
     abbrr = [abbr_data[0].tolist(),abbr_data[1].tolist()]
     return acrr,abbrr
 
