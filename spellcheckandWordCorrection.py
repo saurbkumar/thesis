@@ -2,6 +2,7 @@ import re
 from collections import Counter
 from pandas import read_csv
 from nltk.corpus import stopwords
+from nltk.tag import StanfordNERTagger
 
 ####### Spell Correction #######
 
@@ -43,7 +44,7 @@ def edits2(word):
 ####### Words Correctionns #######
 
 
-test = "this Is @ for Ave. @ nasaasd"
+
 
 def preProcess(string):
     '''
@@ -74,10 +75,10 @@ def data_read():
     '''
     Read acronym and abbreviation data
     '''
-    acronym_data = read_csv(filepath_or_buffer ="data/acronym.csv",header=None,skiprows=0)# since no header info
+    acronym_data = read_csv(filepath_or_buffer ="acronym.csv",header=None,skiprows=0)# since no header info
     acrr = [acronym_data[0].tolist(),acronym_data[1].tolist(),acronym_data[2].tolist()]
     
-    abbr_data = read_csv(filepath_or_buffer="data/Abbreviations.csv",header=None,skiprows=0)
+    abbr_data = read_csv(filepath_or_buffer="dAbbreviations.csv",header=None,skiprows=0)
     abbrr = [abbr_data[0].tolist(),abbr_data[1].tolist()]
     return acrr,abbrr
 
@@ -101,6 +102,7 @@ def linear_search(word,abbr):
     else:
         return None
 stopWords = set(stopwords.words('english'))
+test = "#CHICAGO: Accident @ 65th/Washtenaw Ave."
 temp = preProcess(test)
 output_ = []
 for word in temp.split():
@@ -127,7 +129,8 @@ for word in temp.split():
                  output_.append(word)
      
 print(output_)  
-    
+st = StanfordNERTagger('english.all.3class.distsim.crf.ser.gz',"stanford-ner.jar")
+st.tag('Rami Eid is studying at Stony Brook University in NY'.split())
     
     
     
