@@ -34,7 +34,6 @@ SVM_poly1 = mlines.Line2D([], [], color='#183238', marker='8',
 logistic_reg = mlines.Line2D([], [], color='#242447', marker='p',
                           markersize=5, label='SVM poly1')
 
-
 plt.figure(figsize=(15,15))
 plt.ylim(*ylim)
 plt.xlabel('Features')
